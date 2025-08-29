@@ -1,0 +1,10 @@
+const express = require('express');
+const orderRoute = express.Router();
+const {addToCart,getCartByUser,billInfo} =  require('../controllers/order.controller');
+const { isUser } = require('../middlewares/role.middleware');
+const { verify_accessToken } = require('../middlewares/auth.middleware');
+orderRoute.post('/add-to-cart',verify_accessToken,isUser,addToCart);
+orderRoute.get('/get-cart-by-user/:userId',verify_accessToken,isUser,getCartByUser);
+orderRoute.get('/bill-info/:cartId',verify_accessToken,isUser,billInfo);
+module.exports = orderRoute;
+console.log('The order route is ready to use..');

@@ -1,0 +1,11 @@
+const express = require('express');
+const productRoute = express.Router();
+const {addNewProduct, allProductLists, deleteProduct,productUpdate} = require('../controllers/product.controller');
+const { verify_accessToken } = require('../middlewares/auth.middleware');
+const { isAdmin } = require('../middlewares/role.middleware');
+productRoute.post('/add-new-product',verify_accessToken,isAdmin,addNewProduct);
+productRoute.get('/all-product-lists',allProductLists);
+productRoute.delete('/delete-product/:id',verify_accessToken,isAdmin,deleteProduct);
+productRoute.all('/update-product/:id',verify_accessToken,isAdmin,productUpdate);
+module.exports = productRoute;
+console.log('The product route is ready to use..');

@@ -1,0 +1,23 @@
+const express = require('express');
+const userRoute = express.Router();
+const {register,login,refreshAccessToken,logout,changePassword,getInformation,updateInfo} = require('../controllers/user.controller');
+const { verify_refreshToken, verify_accessToken } = require('../middlewares/auth.middleware');
+const { checkBlackLists } = require('../middlewares/checkblacklists.middleware');
+const { validateToken } = require('../middlewares/logout.middleware');
+userRoute.post('/admin-register',register);
+userRoute.post('/admin-login',login);
+userRoute.post('/admin-new-access-token',checkBlackLists,verify_refreshToken,refreshAccessToken);
+userRoute.post('/admin-logout',validateToken,logout);
+userRoute.post('/admin-change-password',verify_accessToken,changePassword);
+userRoute.get('/admin-information',verify_accessToken,getInformation);
+userRoute.all('/admin-update/:id',verify_accessToken,updateInfo);
+/**user route */
+userRoute.post('/user-register',register);
+userRoute.post('/user-login',login);
+userRoute.post('/user-new-access-token',checkBlackLists,verify_refreshToken,refreshAccessToken);
+userRoute.post('/user-logout',validateToken,logout);
+userRoute.post('/user-change-password',verify_accessToken,changePassword);
+userRoute.get('/user-information',verify_accessToken,getInformation);
+userRoute.all('/user-update/:id',verify_accessToken,updateInfo);
+module.exports = userRoute;
+console.log('The user route is ready to use..');
