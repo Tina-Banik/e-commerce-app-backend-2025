@@ -1,4 +1,4 @@
-**e-commerce-app-backend-2025** 🛍️
+**e-commerce-app-backend-2025** 
 This is the backend for an e-commerce application, a robust and secure server built with Node.js and Express.js. It's designed to manage user authentication, product listings, and order processing platrform.
 **Key Features and Technologies**
 The backend is built with a powerful set of technologies to ensure high performance and security.
